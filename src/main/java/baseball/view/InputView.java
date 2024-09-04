@@ -20,7 +20,7 @@ public class InputView {
 
     }
 
-    public int getUserRestartActionInput() {
+    public int getGameStatus() {
         int userInput = 0;
         try {
             userInput = Integer.parseInt(Console.readLine());

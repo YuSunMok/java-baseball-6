@@ -24,7 +24,7 @@ public class BaseballController {
 
     public void run() {
         outputView.startGameComments();
-        computerInput = initializeGame();
+        initializeGame();
 
         while (isProgressStatus()) {
             outputView.userActionInputComments();
@@ -36,9 +36,9 @@ public class BaseballController {
         outputView.showGameEndComments();
     }
 
-    private List<Integer> initializeGame() {
+    private void initializeGame() {
         changeGameStatusToProgress();
-        return getComputerInput();
+        getRandomNumberForComputerInput();
     }
 
     private void changeGameStatusToProgress() {
@@ -46,15 +46,15 @@ public class BaseballController {
     }
 
     private void process(List<Integer> userActionInput) {
-        int numberOfStrike = compareInput(userActionInput);
+        int gameEndCondition = compareComputerInputWith(userActionInput);
 
-        if (isGameEndCondition(numberOfStrike)) {
-            outputView.showTheWinningComment();
-            gameStatus = inputView.getUserRestartActionInput();
+        if (isGameEndCondition(gameEndCondition)) {
+            outputView.showTheWinningComments();
+            gameStatus = inputView.getGameStatus();
 
             if (isProgressStatus()) {
                 computerInput.clear();
-                getRandomComputerInput(computerInput);
+                getRandomNumberForComputerInput();
             }
         }
     }
@@ -63,11 +63,11 @@ public class BaseballController {
         return gameStatus == 1;
     }
 
-    private static boolean isGameEndCondition(int numberOfStrike) {
+    private boolean isGameEndCondition(int numberOfStrike) {
         return numberOfStrike == INPUT_SIZE;
     }
 
-    private int compareInput(List<Integer> userActionInput) {
+    private int compareComputerInputWith(List<Integer> userActionInput) {
         int ball = 0;
         int strike = 0;
         for(int i = 0; i < INPUT_SIZE; i++) {
@@ -85,22 +85,16 @@ public class BaseballController {
         return strike;
     }
 
-    private static List<Integer> getComputerInput() {
-        List<Integer> computerInput = new ArrayList<>();
-        getRandomComputerInput(computerInput);
-        return computerInput;
-    }
-
-    private static void getRandomComputerInput(List<Integer> computerInput) {
+    private void getRandomNumberForComputerInput() {
         while (computerInput.size() < INPUT_SIZE) {
             int randomNumber = Randoms.pickNumberInRange(1, 9);
-            if (doesNotContain(computerInput, randomNumber)) {
+            if (doesNotContain(randomNumber)) {
                 computerInput.add(randomNumber);
             }
         }
     }
 
-    private static boolean doesNotContain(List<Integer> computerInput, int randomNumber) {
+    private boolean doesNotContain(int randomNumber) {
         return !computerInput.contains(randomNumber);
     }
 
