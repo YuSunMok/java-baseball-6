@@ -18,11 +18,11 @@ public class OutputView {
         System.out.println(ball + "볼 " + strike + "스트라이크");
     }
 
-    public void startGameComment() {
+    public void startGameComments() {
         System.out.println("숫자 야구 게임을 시작합니다.");
     }
 
-    public void userActionInputComment() {
+    public void userActionInputComments() {
         System.out.print("숫자를 입력해주세요 : ");
     }
 
@@ -31,7 +31,7 @@ public class OutputView {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     }
 
-    public void showGameEndComment() {
+    public void showGameEndComments() {
         System.out.println("게임 종료");
     }
 
