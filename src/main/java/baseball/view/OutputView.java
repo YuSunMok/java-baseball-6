@@ -1,17 +1,22 @@
 package baseball.view;
 
+import baseball.model.BaseballStatus;
+
 public class OutputView {
 
-    public void showCompareResult(int ball, int strike) {
-        if (ball == 0 && strike == 0) {
+    public void showCompareResult(BaseballStatus baseballStatus) {
+        int strike = baseballStatus.getStrike();
+        int ball = baseballStatus.getBall();
+
+        if (baseballStatus.isNoting()) {
             showNothingComment();
             return;
         }
-        if (ball == 0) {
+        if (baseballStatus.doesNotHaveBall()) {
             System.out.println(strike + "스트라이크");
             return;
         }
-        if (strike == 0) {
+        if (baseballStatus.doesNotHaveStrike()) {
             System.out.println(ball + "볼");
             return;
         }
@@ -38,6 +43,7 @@ public class OutputView {
     private void showNothingComment() {
         System.out.println("낫싱");
     }
+
 
 
 }
